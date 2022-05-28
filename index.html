@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Random Quote Generator</title>
+    <style>
+        body{
+    background:rgb(238, 134, 151)
+}
+
+.container
+{
+    /* border: 2px solid grey; */
+    background: white;
+    box-shadow: 10px 10px 15px black;
+    margin-top: 10%;
+    margin-left: 32% ;
+    width: 35%;
+    height: 50vh;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.quote{
+    font-family: cursive;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.btn,.btncpy{
+    margin-top: 50px;
+    background: aqua;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="fa fa-quote-left" style="font-size:68px;color:red"></i>
+        <p class="quote"></p>
+        <p class="auth"></p>
+        <button class="btn">Generate Quote</button>
+    </div>
+    <script >
+        const quote = document.querySelector('.quote');
+const author = document.querySelector('.auth');
+ const btn = document.querySelector('.btn');
+const getQuote = async() =>{
+    const joke = await fetch('https://type.fit/api/quotes');
+    const fjoke = await joke.json();
+    const Cjoke = Math.round( Math.random()*fjoke.length);
+    const quoteAuth = fjoke[Cjoke]
+    const txt = quoteAuth.text;
+    const Author = quoteAuth.author;
+    quote.innerHTML = txt;
+    author.innerHTML = Author;
+}
+btn.addEventListener('click',getQuote)
+    </script>
+</body>
+</html>
